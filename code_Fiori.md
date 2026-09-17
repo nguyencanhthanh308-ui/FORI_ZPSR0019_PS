@@ -93,6 +93,17 @@ PS105 → sheet 【補足】Fiori処理 → ô F118
 scratchpad/Main.beforeNo53.js
 ```
 
+### Báo cáo trạng thái toàn project: liệt kê theo nhóm chức năng
+
+Khi được hỏi "đã làm gì / còn thiếu gì" cho **cả project** (không phải 1 task) — liệt kê theo nhóm chức năng, không theo thứ tự hàm trong file:
+
+```
+- Phần tìm kiếm / Phần nhập hàng loạt / Chức năng thêm / copy / xoá
+- Phần table / Phần đăng ký / Các chức năng common
+```
+
+Mỗi dòng `+` đánh dấu rõ **(đã làm)** kèm vị trí bấm được, hoặc **⚠ (chưa làm)** ngay trong nhóm liên quan — không tách danh sách "chưa làm" ra riêng cuối bài. Vị trí phải verify lại bằng `grep -n` trước khi đưa vào báo cáo, không ước lượng số dòng.
+
 ---
 
 ## Quy tắc comment
