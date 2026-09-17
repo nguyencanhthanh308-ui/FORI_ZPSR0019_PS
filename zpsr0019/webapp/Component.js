@@ -1,15 +1,9 @@
-/**
- * eslint-disable @sap/ui5-jsdocs/no-jsdoc
- */
-/**
- * Loading config xlsx unpackage.
- */
 sap.ui.loader.config({
 	paths: {
-		"zpsr0009/libs/xlsx": "https://unpkg.com/dep-xlsx-js-style@1.2.7/dist/xlsx.min",
+		"zpsr0019/libs/xlsx": "https://unpkg.com/dep-xlsx-js-style@1.2.7/dist/xlsx.min",
 	},
 	shim: {
-		"zpsr0009/libs/xlsx": {
+		"zpsr0019/libs/xlsx": {
 			amd: true,
 			exports: "XLSX",
 		},
@@ -17,34 +11,37 @@ sap.ui.loader.config({
 	async: true,
 });
 
-sap.ui.define(
-	["sap/ui/core/UIComponent", "sap/ui/Device", "zpsr0009/model/models"],
-	function (UIComponent, Device, models) {
-		"use strict";
+sap.ui.define(["sap/ui/core/UIComponent", "zpsr0019/model/models"], (UIComponent, models) => {
+	"use strict";
 
-		return UIComponent.extend("zpsr0009.Component", {
-			metadata: {
-				manifest: "json",
-				config: {
-					fullWidth: true,
-				},
+	return UIComponent.extend("zpsr0019.Component", {
+		metadata: {
+			manifest: "json",
+			interfaces: ["sap.ui.core.IAsyncContentCreation"],
+			config: {
+				fullWidth: true,
 			},
+		},
 
-			/**
-			 * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
-			 * @public
-			 * @override
-			 */
-			init: function () {
-				// call the base component's init function
-				UIComponent.prototype.init.apply(this, arguments);
+		init() {
+			// call the base component's init function
+			UIComponent.prototype.init.apply(this, arguments);
 
-				// enable routing
-				this.getRouter().initialize();
+			// set the device model
+			this.setModel(models.createDeviceModel(), "device");
 
-				// set the device model
-				this.setModel(models.createDeviceModel(), "device");
-			},
-		});
-	}
-);
+			// enable routing
+			this.getRouter().initialize();
+
+			// import XLSX from external library
+			const jJSZip = document.createElement("script");
+			jJSZip.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.1/jszip.js");
+			document.head.appendChild(jJSZip);
+
+			const jXLSX = document.createElement("script");
+			jXLSX.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.1/xlsx.js");
+			document.head.appendChild(jXLSX);
+
+		},
+	});
+});
