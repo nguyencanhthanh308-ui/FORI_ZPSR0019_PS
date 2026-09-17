@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="zpsr0019_SRV" xml:lang="ja" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="SearchHelpMaterial" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TEXT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SearchHelpPlant" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TEXT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SearchHelpUnit" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TEXT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SearchHelpPurType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TEXT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SearchHelpStgLocation" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Werks"/>
+                    <PropertyRef Name="Lgort"/>
+                </Key>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="プラント" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lgort" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="保管場所" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="名称" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SuggestForTaskCode" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Inkidaino001"/>
+                    <PropertyRef Name="Inwerks001"/>
+                </Key>
+                <Property Name="Inkidaino001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="機台NO（前方一致）" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inwerks001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="プラント" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outtaskcode002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫タスク" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SuggestForBdter" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Inkidaino001"/>
+                    <PropertyRef Name="Intaskcode001"/>
+                    <PropertyRef Name="Inwerks001"/>
+                </Key>
+                <Property Name="Inkidaino001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="機台NO（前方一致）" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Intaskcode001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫タスク" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inwerks001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="プラント" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outbdter002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="所要日付" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SuggestForPurType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Inmatnr001"/>
+                    <PropertyRef Name="Inwerks001"/>
+                </Key>
+                <Property Name="Inmatnr001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="品目" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inwerks001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="プラント" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outbdmng001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="調達タイプ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Mat0m" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Maktg"/>
+                    <PropertyRef Name="Spras"/>
+                    <PropertyRef Name="Matnr"/>
+                </Key>
+                <Property Name="Maktg" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="テキスト" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Spras" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="言語" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="品目" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SearchHelpTaskCode" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Werks"/>
+                    <PropertyRef Name="Zkidaino"/>
+                    <PropertyRef Name="Ztaskcode"/>
+                </Key>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="プラント" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zkidaino" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:label="機台NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ztaskcode" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="タスクコード" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ComponentItemSchList" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Inkidaino001"/>
+                    <PropertyRef Name="Insortl001"/>
+                    <PropertyRef Name="Intaskcode001"/>
+                    <PropertyRef Name="Inusr02001"/>
+                    <PropertyRef Name="Inmatnr001"/>
+                    <PropertyRef Name="Inwerks001"/>
+                </Key>
+                <Property Name="Inkidaino001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="機台NO（前方一致）" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inkzear001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫完了フラグ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Insortl001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="組立かたまり" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outenmng001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="引落数量" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Intaskcode001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫タスク" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outkzear001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫完了フラグ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inusr02001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="要求NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inmatnr001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="品目" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inwerks001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="プラント" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inzuban001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="図番" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inshukkosaki001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫先" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inbdter001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="所要日付" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inshukkojoukyou001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫指示状況" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Injitsushukkono001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="実出庫NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ingort001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="保管場所" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inplno001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="PL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inoyahinban001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="親品番" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inshorino001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="処理NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inbdmng001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="購買依頼タイプ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inznw3status" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="組計状況" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outno001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outmode001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CRT：追加　UPD：更新 DEL：削除" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outshukkojoukyou002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫指示状況" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outkidaino001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="機台NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outsortl002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="組立かたまり" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outusr02002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="要求NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outmatnr002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="品目" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outwerks002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="プラント" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outmaktx001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="品名" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outbdmng001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="調達タイプ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outbdmng002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="所要数" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outmeins001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="単位" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outbdter002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="所要日付" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outtaskcode002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫タスク" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outshukkosaki002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="出庫先" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outzuban002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="図番" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outpositionno001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ポジション" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outplno001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="PL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outoyahinban001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="親品番" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outhojohinban001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="補助品番" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outshorino002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="処理NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outlgort002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="保管場所" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outjitsushukkono002" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="実出庫NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outunchangeflg001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="編集不可フラグ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outrsnum001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入出庫予定" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outrspos001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="明細番号" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outkzmpf001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Man.所要日" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outposnr001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="BOM明細番号" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outznw3status" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="組計状況" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outlgortold001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="保管場所(旧)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outerfmg001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入力単位数量" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outerfme001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="入力単位" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outrgekz001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="バックフラッシュ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Outhikiatesuryo001" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="引当合計数量" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ComponentItemUpdList" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Parameter0"/>
+                    <PropertyRef Name="Parameter1"/>
+                    <PropertyRef Name="Parameter2"/>
+                    <PropertyRef Name="Parameter3"/>
+                </Key>
+                <Property Name="Parameter0" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="PARAMETER0" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Parameter1" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="PARAMETER1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Parameter2" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="PARAMETER2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Parameter3" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="PARAMETER3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SearchHelpPurresv" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TEXT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SearchHelp_TXT30" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="TEXT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="zpsr0019_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="SearchHelpMaterialSet" EntityType="zpsr0019_SRV.SearchHelpMaterial" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SearchHelpPlantSet" EntityType="zpsr0019_SRV.SearchHelpPlant" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SearchHelpUnitSet" EntityType="zpsr0019_SRV.SearchHelpUnit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SearchHelpPurTypeSet" EntityType="zpsr0019_SRV.SearchHelpPurType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SearchHelpStgLocationSet" EntityType="zpsr0019_SRV.SearchHelpStgLocation" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SuggestForTaskCodeSet" EntityType="zpsr0019_SRV.SuggestForTaskCode" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SuggestForBdterSet" EntityType="zpsr0019_SRV.SuggestForBdter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SuggestForPurTypeSet" EntityType="zpsr0019_SRV.SuggestForPurType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Mat0mSet" EntityType="zpsr0019_SRV.Mat0m" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SearchHelpTaskCodeSet" EntityType="zpsr0019_SRV.SearchHelpTaskCode" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ComponentItemSchListSet" EntityType="zpsr0019_SRV.ComponentItemSchList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ComponentItemUpdListSet" EntityType="zpsr0019_SRV.ComponentItemUpdList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SearchHelpPurresvSet" EntityType="zpsr0019_SRV.SearchHelpPurresv" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SearchHelp_TXT30Set" EntityType="zpsr0019_SRV.SearchHelp_TXT30" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="https://s4prototype:443/sap/opu/odata/sap/zpsr0019_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://s4prototype:443/sap/opu/odata/sap/zpsr0019_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

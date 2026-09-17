@@ -1,0 +1,89 @@
+/* Enter your custom styles here */
+.unset-border {
+	border: unset;
+}
+
+.sapUiLocalBusyIndicatorSizeBig {
+	font-size: 1rem;
+	background-color: transparent;
+}
+
+/* Align center table items */
+.sapFDynamicPageContent .sapUiTableHeaderDataCell .sapMLabel {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.sapFDynamicPageContent .sapUiTableHeaderDataCell .sapMLabelTextWrapper {
+	text-align: center;
+}
+
+/* Custom line-height variant */
+.ctm-lineH {
+	line-height: 1.2rem;
+}
+
+.sapFDynamicPageHeaderContent .sapUiAFLayoutItem {
+	flex-basis: unset;
+	flex: 0 0 18% !important;
+}
+
+/* Custom MultiCombobox */
+/* .sapMList {
+	max-height: 50vh;
+} */
+
+.sapMSelectList {
+	max-height: 40vh;
+}
+
+.sapMSLITitleOnly {
+	line-height: 1.3rem;
+}
+
+.sapMSLIDiv {
+	flex: initial;
+}
+
+/* Custom clear button */
+.btn_clear_custom > span {
+	background-color: #fff;
+	border: 0.0625rem solid #0854a0 !important;
+}
+
+.btn_clear_custom:hover > span {
+	background-color: #ebf5fe !important;
+}
+
+/* Horizontal radio group */
+.sapMRbG {
+	display: flex;
+}
+
+/* Display none */
+.d-none {
+	display: none;
+}
+
+.d-flex {
+	display: flex;
+}
+
+/* Custom Icon Input - Right Position  */
+/* Set padding at icon position */
+.inputIconRight .sapMInputBaseContentWrapper {
+	padding-right: 1.25rem;
+}
+
+/* icon position */
+.sapUiSizeCompact .inputIconRight .sapMInputBaseContentWrapper:after {
+	font-family: "SAP-icons";
+	margin-top: 0.25rem;
+	font-size: 1rem;
+	margin-right: -0.7rem;
+}
+
+/* sap-icon://search */
+.inputIconRight.search .sapMInputBaseContentWrapper:after {
+	content: "\e00d";
+}

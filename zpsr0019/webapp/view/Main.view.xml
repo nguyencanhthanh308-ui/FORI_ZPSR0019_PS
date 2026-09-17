@@ -1,0 +1,1609 @@
+<mvc:View
+	controllerName="zpsr0019.controller.Main"
+	xmlns:unified="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:table="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:variant="sap.ui.comp.variants"
+	xmlns:ft="sap.ushell.ui.footerbar"
+	xmlns:lf="sap.ui.layout.form"
+>
+	<f:DynamicPage id="_IDGenDynamicPage" showFooter="true">
+        <!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader id="_MainDynamicPageHeader" pinnable="false">
+				<f:content>
+					<fb:FilterBar
+						id="filterbar"
+						showGoOnFB="false"
+						useToolbar="false"
+						showFilterConfiguration="false"
+						filterContainerWidth="15rem"
+					>
+						<fb:filterGroupItems>
+							<!-- 機台NO（前方一致）-->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem1"
+								groupName="g1"
+								name="MachineNo"
+								label="{i18n>filterMachineNumber}"
+								visibleInFilterBar="true"
+								mandatory="true"
+								class="ctm-style-require"
+							>
+								<fb:control>
+									<Input
+										id="Z_KIDAI_NO"
+										maxLength="13"
+										type="Text"
+										value="{screen>/MachineNo}"
+										liveChange="onChangeValidateFilter($event, 'MachineNo')"
+										valueState="{screen>/valueStateMachineNo}"
+										valueStateText="{screen>/valueStateTextMachineNo}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 組立かたまり -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem2"
+								groupName="g1"
+								name="AssemblyGroup"
+								label="{i18n>filterAssemblyGroup}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="SORTL"
+										maxLength="10"
+										value="{screen>/AssemblyGroup}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 出庫タスク -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem3"
+								groupName="g1"
+								name="OutboundTask"
+								label="{i18n>filterOutboundTask}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="Z_TASK_CODE"
+										type="Text"
+										value="{screen>/OutboundTask}"
+										maxLength="8"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 要求NO -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem4"
+								groupName="g1"
+								name="RequestNo"
+								label="{i18n>filterRequestNO}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="USR02"
+										type="Text"
+										value="{screen>/RequestNo}"
+										maxLength="10"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 品目コード -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem5"
+								groupName="g1"
+								name="ItemCode"
+								label="{i18n>filterItemCode}"
+								visibleInFilterBar="true"
+								mandatory="true"
+							>
+								<fb:control>
+									<Input
+										id="MATNR"
+										maxLength="18"
+										type="Text"
+										value="{screen>/ItemCode}"
+										valueState="{screen>/valueStateItemCode}"
+										valueStateText="{screen>/valueStateTextItemCode}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- プラント -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem6"
+								groupName="g1"
+								name="Plant"
+								label="{i18n>filterPlant}"
+								visibleInFilterBar="true"
+								mandatory="true"
+							>
+								<fb:control>
+									<ComboBox
+										id="WERKS"
+										name="Plant"
+										showSecondaryValues="true"
+										items="{path: 'PlantModel>/', templateShareable: false}"
+										selectedKey="{screen>/Plant}"
+										valueState="{screen>/valueStatePlant}"
+										valueStateText="{screen>/valueStateTextPlant}"
+										change="onLoadStgLocationSet"
+									>
+										<core:ListItem
+											id="IDGenListItem1"
+											key="{PlantModel>Code}"
+											text="{PlantModel>Code}"
+											additionalText="{PlantModel>Text}"
+										/>
+									</ComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 図番 -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem7"
+								groupName="g1"
+								name="DrawingNo"
+								label="{i18n>filterDrawingNo}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="Z_ZUBAN"
+										maxLength="11"
+										type="Text"
+										value="{screen>/DrawingNo}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							
+							<!-- 出庫先 -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem8"
+								groupName="g1"
+								name="Destination"
+								label="{i18n>filterDestination}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="Z_SHUKKOSAKI"
+										maxLength="5"
+										type="Text"
+										value="{screen>/Destination}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 所要日付 -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem9"
+								groupName="g1"
+								name="RequiredDate"
+								label="{i18n>filterRequiredDate}"
+								visibleInFilterBar="true"
+								mandatory="true"
+							>
+								<fb:control>
+									<DateRangeSelection
+									id="BDTER"
+									displayFormat="yyyy/MM/dd"
+									valueFormat="yyyy/MM/dd"
+									value="{screen>/RequiredDate}"
+									change="onChangeValidateFilter($event, 'RequiredDate')"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 出庫指示状況 -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem10"
+								groupName="g1"
+								name="IssueInstructionStatus"
+								label="{i18n>filterIssueInstructionStatus}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Select
+										id="Z_SHUKKO_JOUKYOU"
+										items="{path: 'IssueInstructionStatusModel>/', templateShareable:false}"
+										selectedKey="{screen>/IssueInstructionStatus}"
+									>
+										<core:Item id="_IDGenItem" key="{IssueInstructionStatusModel>Code}" text="{IssueInstructionStatusModel>Text}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 出庫完了フラグ -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem16"
+								groupName="g1"
+								name="IssueCompletionFlag"
+								label="{i18n>filterIssueCompletionFlag}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Select
+										id="KZEAR"
+										items="{path: 'IssueCompletionFlagModel>/', templateShareable:false}"
+										selectedKey="{screen>/IssueCompletionFlag}"
+									>
+										<core:Item id="KZEAR001" key="{IssueCompletionFlagModel>Code}" text="{IssueCompletionFlagModel>Text}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 実出庫NO -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem11"
+								groupName="g1"
+								name="ActualGoodsIssueNo"
+								label="{i18n>filterActualGoodsIssueNo}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="Z_JITSUSHUKKO_NO"
+										maxLength="6"
+										type="Text"
+										value="{screen>/ActualGoodsIssueNo}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							
+							<!-- 保管場所 -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem12"
+								groupName="g1"
+								name="StorageLocation"
+								label="{i18n>filterStorageLocation}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<ComboBox
+										id="LGORT"
+										showSecondaryValues="true"
+										items="{path: 'StorageLocationModel>/', templateShareable:false}"
+										selectedKey="{screen>/StorageLocation}"
+										change="onChangeStgLocationSet"
+									>
+										<core:ListItem
+											id="_IDGenListItem1"
+											key="{StorageLocationModel>Lgort}"
+											text="{StorageLocationModel>Lgort}"
+											additionalText="{StorageLocationModel>Name1}"
+										/>
+									</ComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- PL -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem13"
+								groupName="g1"
+								name="PL"
+								label="{i18n>filterPL}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="Z_PLNO"
+										maxLength="11"
+										type="Text"
+										value="{screen>/PL}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 親品番 -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem14"
+								groupName="g1"
+								name="ParentPartNo"
+								label="{i18n>filterParentPartNo}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="Z_OYA_HINBAN"
+										maxLength="11"
+										type="Text"
+										value="{screen>/ParentPartNo}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 処理NO -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem15"
+								groupName="g1"
+								name="ProcessNo"
+								label="{i18n>filterProcessNo}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<Input
+										id="Z_SHORI_NO"
+										maxLength="7"
+										type="Text"
+										value="{screen>/ProcessNo}"
+										submit="onPressSearchButton"
+									/>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 購買依頼タイプ -->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem17"
+								groupName="g1"
+								name="PurchaseRequisitionType"
+								label="{i18n>filterPurchaseRequisitionType}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<ComboBox
+										id="KOUBAI_IRAI_TYPE"
+										showSecondaryValues="true"
+										items="{path: 'PurchaseReqTypeModel>/', templateShareable:false}"
+										selectedKey="{screen>/PurchaseRequisitionType}"
+									>
+										<core:ListItem
+											id="BDMNG002ListItem"
+											key="{PurchaseReqTypeModel>Code}"
+											text="{PurchaseReqTypeModel>Code}"
+											additionalText="{PurchaseReqTypeModel>Text}"
+										/>
+									</ComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+
+							<!-- 組計状況-->
+							<fb:FilterGroupItem
+								id="_IDGenFilterGroupItem18"
+								groupName="g1"
+								name="AssemblyPlanningStatus"
+								label="{i18n>filterAssemblyPlanningStatus}"
+								visibleInFilterBar="true"
+							>
+								<fb:control>
+									<MultiComboBox
+										id="TXT3001"
+										showSecondaryValues="true"
+										items="{
+                                            path: 'AssemblyStatusModel>/',
+                                            templateShareable: false
+                                        }"
+										selectedKeys="{screen>/AssemblyPlanningStatus}"
+									>
+										<core:ListItem id="_IDGenListItem" key="{AssemblyStatusModel>Code}" text="{AssemblyStatusModel>Text}" />
+									</MultiComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>
+					</fb:FilterBar>
+					<OverflowToolbar id="_IDGenOverflowToolbar01" class="border-unset">
+						<ToolbarSpacer id="_IDGenToolbarSpacer01" />
+						<Button
+							id="SearchBtn"
+							type="Emphasized"
+							text="{i18n>btnSearch}"
+							width="4rem"
+							press="onPressSearchButton"
+							class="sapUiTinyMarginBeginEnd"
+						/>
+						<Button id="ClearBtn" text="{i18n>btnClear}" press="onPressClearButton" width="4rem" />
+					</OverflowToolbar>
+					<ToolbarSpacer id="_IDGenToolbarSpacer3" />
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+        <!-- DynamicPage Content -->
+		<f:content>
+			<table:Table
+				id="table"
+				selectionMode="MultiToggle"
+				selectionBehavior="RowOnly"
+				cellClick="onCellClick"
+				visibleRowCount="10"
+				ariaLabelledBy="title"
+				rows="{oDataTable>/}"
+				class="sapUiContentPadding"
+				showColumnVisibilityMenu="true"
+				columnVisibility="onDisplaySaveButton"
+				sort="onDisplaySaveButton"
+				columnMove="onDisplaySaveButton"
+				columnResize="onDisplaySaveButton"
+			>
+				<table:extension>
+					<OverflowToolbar id="_IDGenOverflowToolbar" class='sapUiSmallMarginBottom' width="auto" style="Clear">
+						<ToolbarSpacer id="_IDGenToolbarSpacer5" />
+						<Button id="BulkBtn001" text="{i18n>btnCollpaseOpen}" press="onToggleReflectingButton" enabled="true" width="12rem" />   
+					</OverflowToolbar>
+
+					<lf:SimpleForm
+						id="_IDGenSimpleForm"
+						class="sapUiSmallMarginBottom displayNone"
+						layout="ColumnLayout"
+						columnsM="2"
+						columnsL="3"
+						columnsXL="4"
+					>						
+						<!-- 組立かたまり -->
+						<OverflowToolbar id="_IDGenOverflowToolbarAssemblyGroup" class="unset-border">
+							<CheckBox id="CheckboxAssemblyGroup" name="AssemblyGroup" selected="{screen>/selectAssemblyGroup}" />
+							<Label id="LableAssemblyGroup" text="{i18n>labelAssemblyGroup}" width="8rem" />
+							<Input id="BULKSORTL" value="{screen>/ValueAssemblyGroup}" width="12rem" change="onChangeBatchInputField" maxLength="10" />
+						</OverflowToolbar>
+
+						<!-- 購買依頼タイプ -->
+						<OverflowToolbar id="_IDGenOverflowToolbarPurchaseRequisitionType" class="unset-border">
+							<CheckBox id="CheckboxPurchaseRequisitionType" name="PurchaseRequisitionType" selected="{screen>/selectPurchaseRequisitionType}" />
+							<Label id="LablePurchaseRequisitionType" text="{i18n>labelPurchaseReqType}" width="8rem" />							
+							<ComboBox
+								id="BULKKOUBAI_IRAI_TYPE"
+								showSecondaryValues="true"
+								items="{path: 'PurchaseReqTypeModel>/', templateShareable:false}"
+								selectedKey="{screen>/ValuePurchaseRequisitionType}"
+								change="onChangeBatchInputField"
+								width="12rem"
+							>
+								<core:ListItem
+									id="PurchaseRequisitionTypeListItem"
+									key="{PurchaseReqTypeModel>Code}"
+									text="{PurchaseReqTypeModel>Code}"
+									additionalText="{PurchaseReqTypeModel>Text}"
+								/>
+							</ComboBox>
+						</OverflowToolbar>
+
+						<!-- 所要日付 -->												
+						<OverflowToolbar id="_IDGenOverflowToolbarRequiredDate" class="unset-border">
+							<CheckBox id="CheckboxRequiredDate" name="BULKBDTER" selected="{screen>/selectRequiredDate}" />
+							<Label id="LableRequiredDate" text="{i18n>labelRequiredDate}" width="8rem" />
+							<DatePicker
+								id="BULKBDTER"
+								displayFormat="yyyy/MM/dd"
+								value="{screen>/ValueRequiredDate}"
+								change="onChangeRequiredDateBatchInput"
+								name="RequiredDate"
+								width="12rem"
+							/> 													
+						</OverflowToolbar>
+
+						<!-- 出庫タスク -->
+						<OverflowToolbar id="_IDGenOverflowToolbarOutboundTask" class="unset-border">
+							<CheckBox id="CheckboxOutboundTask" name="OutboundTask" selected="{screen>/selectOutboundTask}" />
+							<Label id="LableOutboundTask" text="{i18n>labelGoodsIssueTask}" width="8rem" />
+							<Input
+								id="BULKZ_TASK_CODE"
+								value="{screen>/ValueOutboundTask}"
+								change="onChangeBatchInputField"
+								maxLength="8"
+								width="12rem"
+							/>
+						</OverflowToolbar>					
+
+						<!-- 出庫先 -->
+						<OverflowToolbar id="_IDGenOverflowToolbarDestination" class="unset-border">
+							<CheckBox id="CheckboxDestination" name="Destination" selected="{screen>/selectDestination}" />
+							<Label id="LableDestination" text="{i18n>labelGoodsIssueDestination}" width="8rem" />
+							<Input
+								id="BULKZ_SHUKKOSAKI"
+								value="{screen>/ValueDestination}"
+								width="12rem"
+								change="onChangeBatchInputField"
+								maxLength="5"
+							/>
+						</OverflowToolbar>
+
+						<!-- 保管場所 -->
+						<OverflowToolbar id="_IDGenOverflowToolbarStorageLocation" class="unset-border">
+							<CheckBox id="checkboxStorageLocation" name="StorageLocation" selected="{screen>/selectStorageLocation}" />
+							<Label id="lableStorageLocation" text="{i18n>labelStorageLocation}" width="8rem" />							
+							<ComboBox
+								id="BULKLGORT"
+								showSecondaryValues="true"
+								items="{path: 'StorageLocationModel>/', templateShareable:false}"
+								selectedKey="{screen>/ValueStorageLocation}"
+								change="onChangeBatchInputField"
+								width="12rem"
+							>
+								<core:ListItem
+									id="StorageLocationListItem"
+									key="{StorageLocationModel>Lgort}"
+									text="{StorageLocationModel>Lgort}"
+									additionalText="{StorageLocationModel>Name1}"
+								/>
+							</ComboBox>
+						</OverflowToolbar>
+
+						<!-- バックフラッシュ -->
+						<OverflowToolbar id="_IDGenOverflowToolbarBackflush" class="unset-border">
+							<CheckBox id="CheckboxBackflush" name="Backflush" selected="{screen>/selectBackflush}" />
+							<Label id="LableBackflush" text="{i18n>labelBackflush}" width="8rem" />
+							<CheckBox id="BULKRGEKZ" selected="{screen>/ValueBackflush}" select="onChangeBatchInputField" />
+						</OverflowToolbar>
+
+                    	<!--btn 反映 -->
+						<OverflowToolbar id="_IDGenOverflowToolbarApplyBtn001" class="unset-border" width="auto" style="Clear">
+							<ToolbarSpacer id="_IDGenToolbarSpacer6" />
+							<Button
+								id="ApplyBtn001"
+								text="{i18n>btnReflection}"
+								press="onPressReflectionButton"
+								enabled="true"
+								type="Emphasized"
+								width="12rem"
+							/>   
+						</OverflowToolbar>
+					</lf:SimpleForm>
+
+					<OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear" class="sapUiSmallMarginBottom">
+                        <!-- Table Title -->
+						<Text id="RowCount" text="{i18n>totalRecord}（{screen>/RowCount}）｜" class="sapMTitleStyleH4" />
+                        <!-- Variant Management -->
+						<variant:VariantManagement
+							class="ctm-lineH"
+							id="Variants"
+							variantItems="{VariantList>/}"
+							enabled="true"
+							showExecuteOnSelection="false"
+							showShare="false"
+						>
+							<variant:variantItems>
+								<variant:VariantItem
+									id="_IDGenVariantItem1"
+									text="{VariantList>Name}"
+									key="{VariantList>Key}"
+								/>
+							</variant:variantItems>
+						</variant:VariantManagement>
+                        <!-- Bookmark -->
+						<ft:AddBookmarkButton id="addToHome" text="" tooltip="{i18n>btnBookmark}" />
+                        <!-- P13n Dialog -->
+                    	<Button
+							id="p13nSetting"
+							icon="sap-icon://action-settings"
+							press="onP13nDialogPress"
+							tooltip="{i18n>btnViewSettings}"
+						/>
+                        <!-- Visible Row Count Slider -->
+						<Slider
+							id="visibleSlider"
+							class="sapUiTinyMarginBottom"
+							value="{screen>/recordVisibleSelected}"
+							width="10%"
+							min="1"
+							max="50"
+							showAdvancedTooltip="true"
+							showHandleTooltip="false"
+							change="onSliderChange"
+						/>
+						<ToolbarSpacer id="_IDGenToolbarSpacer1" />
+						<!-- Button 追加 -->
+						<Button id="AddBtn001" text="{i18n>btnAdd}" press="onPressAddButton" />
+						<!-- Button 複写 -->
+						<Button id="DupBtn001" text="{i18n>btnCopy}" press="onPressCopyButton" />
+						<!-- Button 削除 -->
+						<Button id="ClearBtn001" text="{i18n>btnDelete}" press="onPressDeleteButton" />
+
+						<!-- Button EXCEL取込 -->
+						<unified:FileUploader
+							id="ExcelImportBtn001"
+							buttonOnly="true"
+							fileType="xlsx"
+							change="onPressImportFile"
+							buttonText="{i18n>btnImport}"
+							sameFilenameAllowed="true"
+							typeMissmatch="onTypeMissMatch"
+						/>
+                        <!-- Button 取込フォーマットダウンロード-->
+                    	<Button
+							id="ExcelExportBtn001"
+							text="{i18n>btnExport}"
+							press="onPressDownloadFormatExcel"
+							enabled="true"
+							width="auto"
+						/>
+                        <!-- Button Download -->
+						<Button id="_IDGenButton3" icon="sap-icon://excel-attachment" press="onPressDownloadButton" tooltip="{i18n>btnDowloadExcel}"/>
+
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column id="_IDGenColumn1" width="1.5rem">
+						<VBox id="_IDGenVBox01New">
+							<CheckBox
+								id="IdCheckAll"
+								selected="{screen>/bCheckAll}"
+								class="checkboxclass"
+								select="onCheckAllToggle"
+								editable="{screen>/bEditable}"
+							/>
+						</VBox>
+						<table:template>
+							<VBox id="_IDGenVBox1">
+								<customData>
+									<core:CustomData key="style-class" value="D" writeToDom="{= ${oDataTable>operation} === 'D'}" /> 
+								</customData>
+								<CheckBox
+									id="CheckBox"
+									select="onChangeOperation"
+									selected="{oDataTable>selected}"
+									class="FixColumn"
+									enabled="{=!${oDataTable>Outunchangeflg001} &amp;&amp; (${oDataTable>operation} !== 'D')}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- No -->
+					<table:Column id="_IDGenColumn2" hAlign="Center" width="3rem" name="{i18n>headerNo}" sortProperty="index">
+						<Label id="_IDGenLabel1" text="{i18n>headerNo}" />
+						<table:template>
+							<VBox id="_IDGenVBox2">
+								<customData>
+									<core:CustomData key="style-class" value="D" writeToDom="{= ${oDataTable>operation} === 'D'}" /> 
+								</customData>
+								<Text id="OUTNO" text="{oDataTable>index}" maxLines="1" />
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 機台NO -->
+					<table:Column
+						id="_IDGenColumn4"
+						width="8rem"
+						hAlign="Center"
+						name="{i18n>headerMachineNo}"
+						sortProperty="OUTZ_KIDAI_NO"
+					>
+						<Label id="_IDGenLabel3" text="{i18n>headerMachineNo}" />
+						<table:template>
+							<VBox id="_IDGenVBox4">
+								<Text
+									id="_IDGenText1"
+									text="{oDataTable>OUTZ_KIDAI_NO}"
+									visible="{= ${oDataTable>operation} !== 'I' }"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_KIDAI_NO}"
+									class="text-align-left"
+								/>
+								<Input
+									id="OUTZ_KIDAI_NO"
+									visible="{= ${oDataTable>operation} === 'I' }"
+									maxLength="13"
+									value="{oDataTable>OUTZ_KIDAI_NO}"
+									liveChange="onAutoSelectCheckbox"
+									change="onChangeValidateCell"
+									valueState="{oDataTable>valueStateMachineNo}"
+									valueStateText="{oDataTable>valueStateTextMachineNo}"
+									textAlign="Begin"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 組立かたまり-->
+					<table:Column
+						id="_IDGenColumn5"
+						hAlign="Center"
+						sortProperty="OUTSORTL"
+						width="8rem"
+						name="{i18n>headerAssemblyMass}"
+					>
+						<Label required="true" id="_IDGenLabel4" text="{i18n>headerAssemblyMass}" />
+						<table:template>
+							<VBox id="_IDGenVBox5">
+								<Input
+									id="OUTSORTL"
+									value="{oDataTable>OUTSORTL}"
+									maxLength="10"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStateAssemblyMass}"
+									valueStateText="{oDataTable>valueStateTextAssemblyMass}"
+									textAlign="Begin"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+									change="onChangeValidateCell"
+								/>
+								 <Text
+									id="AssemblyMassText"
+									text="{oDataTable>OUTSORTL}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTSORTL}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 要求NO -->
+					<table:Column id="_IDGenColumn6" hAlign="Center" sortProperty="OUTUSR02" width="5rem" name="{i18n>headerRequestNO}">
+						<Label id="_IDGenLabel5" text="{i18n>headerRequestNO}" />
+						<table:template>
+							<VBox id="_IDGenVBox6">
+								<Text
+									id="OUTUSR02"
+									text="{oDataTable>OUTUSR02}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTUSR02}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+					<!-- 組計状況 -->
+					<table:Column
+						id="_IDGenColumn30"
+						hAlign="Center"
+						sortProperty="OUTTXT30"
+						width="5rem"
+						name="{i18n>headerAssemblyStatus}"
+					>
+						<Label id="_IDGenLabel30" text="{i18n>headerAssemblyStatus}" />
+						<table:template>
+							<VBox id="_IDGenVBox31">
+								<Text
+									id="OUTTXT30"
+									text="{oDataTable>OUTTXT30}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTTXT30}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 品目コード -->
+					<table:Column sortProperty="OUTMATNR" id="_IDGenColumn7" width="8rem" name="{i18n>headerItem}" hAlign="Center">
+						<Label required="true" id="_IDGenLabel6" text="{i18n>headerItem}" />
+						<table:template>
+							<VBox id="_IDGenVBox7">
+								<Text
+									id="_IDGenText2"
+									text="{oDataTable>OUTMATNR}"
+									visible="{= ${oDataTable>operation} !== 'I' }"
+									maxLines="1"
+									tooltip="{oDataTable>OUTMATNR}"
+									class="text-align-left"
+								/>
+								<Input
+									id="OUTMATNR"
+									visible="{= ${oDataTable>operation} === 'I' }"
+									maxLength="18"
+									value="{oDataTable>OUTMATNR}"
+									valueState="{oDataTable>valueStateItemCode}"
+									valueStateText="{oDataTable>valueStateTextItemCode}"
+									change="onChangeValidateCell"
+									liveChange="onAutoSelectCheckbox"
+									textAlign="Begin"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- プラント -->
+					<table:Column id="_IDGenColumn8" sortProperty="OUTWERKS" width="6rem" name="{i18n>headerPlant}" hAlign="Center">
+						<Label required="true" id="_IDGenLabel7" text="{i18n>headerPlant}" />
+						<table:template>
+							<VBox id="_IDGenVBox8">
+								<Text
+									id="_IDGenText3"
+									text="{oDataTable>OUTWERKS}"
+									visible="{= ${oDataTable>operation} !== 'I' }"
+									maxLines="1"
+									tooltip="{oDataTable>OUTWERKS}"
+									class="text-align-left"
+								/>
+								<ComboBox
+									id="OUTWERKS"
+									visible="{= ${oDataTable>operation} === 'I' }"
+									showSecondaryValues="true"
+									items="{
+											path: 'PlantModel>/',
+											templateShareable: false
+									}"
+									selectedKey="{oDataTable>OUTWERKS}"
+									valueState="{oDataTable>valueStatePlant}"
+									valueStateText="{oDataTable>valueStateTextPlant}"
+									change="onChangeValidateCell"
+								>
+									<core:ListItem
+										id="PlantItem"
+										key="{PlantModel>Code}"
+										text="{PlantModel>Code}"
+										additionalText="{PlantModel>Text}"
+									/>
+								</ComboBox>							
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 品目テキスト -->
+					<table:Column
+						id="_IDGenColumn9"
+						sortProperty="OUTMAKTX"
+						width="14rem"
+						name="{i18n>headerProductName}"
+						hAlign="Center"
+					>
+						<Label id="_IDGenLabel8" text="{i18n>headerProductName}" />
+						<table:template>
+							<VBox id="_IDGenVBox9">
+								<Text
+									id="OUTMAKTX"
+									text="{oDataTable>OUTMAKTX}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTMAKTX}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 購買依頼タイプ -->
+					<table:Column
+						id="_IDGenColumn10"
+						sortProperty="OUTKOUBAI_IRAI_TYPE"
+						width="9rem"
+						name="{i18n>headerPurchaseRequisitionType}"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel9" text="{i18n>headerPurchaseRequisitionType}" />
+						<table:template>
+							<VBox id="_IDGenVBox10">
+								<ComboBox
+									id="OUTKOUBAI_IRAI_TYPE"
+									showSecondaryValues="true"
+									items="{path: 'PurchaseReqTypeModel>/', 
+									templateShareable:false}"
+									selectedKey="{oDataTable>OUTKOUBAI_IRAI_TYPE}"
+									value="{oDataTable>OUTKOUBAI_IRAI_TYPE}"
+									valueState="{oDataTable>valueStatePurchaseRequisitionType}"
+									valueStateText="{oDataTable>valueStateTextPurchaseRequisitionType}"
+									change="onChangeValidateCell"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation', 'oDataTable>OUTENMNGSort'], formatter: '.onFormatKobairaiTypeEditable'}"
+								>
+									<core:ListItem
+										id="BDMNG001ListItem"
+										key="{PurchaseReqTypeModel>Code}"
+										text="{PurchaseReqTypeModel>Code}"
+										additionalText="{PurchaseReqTypeModel>Text}"
+									/>
+								</ComboBox>
+								<Text
+									id="OUTKOUBAI_IRAI_TYPE_TEXT"
+									text="{oDataTable>OUTKOUBAI_IRAI_TYPE}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTKOUBAI_IRAI_TYPE}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation', 'oDataTable>OUTENMNGSort'], formatter: '.onShowKobairaiTypeText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+					<!-- 数量 -->
+					<table:Column
+						id="_IDGenColumn35"
+						hAlign="Center"
+						width="8rem"
+						name="{i18n>headerInputQuantity}"
+						sortProperty="OUTERFMGSort"
+					>
+						<Label required="true" id="_IDGenLabel35" text="{i18n>headerInputQuantity}" />
+						<table:template>
+							<VBox id="_IDGenVBox35">
+								<Input
+									id="OUTERFMG"
+									textAlign="End"
+									value="{
+                                        parts:['oDataTable>OUTERFMG', { value: 'JPY'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false},
+                                        formatter : '.currencyInputFormatter'
+                                    }"
+									valueState="{oDataTable>valueStateOUTERFMG}"
+									valueStateText="{oDataTable>valueStateTextOUTERFMG}"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+									liveChange="onAmountOfMoneyChange"
+									maxLength="10"
+									change="onChangeValidateCell"
+								/>
+								<Text
+									id="OUTERFMG_TEXT"
+									text="{
+										parts:['oDataTable>OUTERFMG', { value: 'JPY'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false},
+                                        formatter : '.currencyInputFormatter'
+									}"
+									tooltip="{
+										parts:['oDataTable>OUTERFMG', { value: 'JPY'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false},
+                                        formatter : '.currencyInputFormatter'
+									}"
+									maxLines="1"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+									width="100%"
+									textAlign="End"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 入力単位 -->
+					<table:Column id="_IDGenColumn34" width="6rem" name="{i18n>headerInputUnit}" sortProperty="OUTERFME" hAlign="Center">
+						<Label required="true" id="_IDGenLabel34" text="{i18n>headerInputUnit}" />
+						<table:template>
+							<VBox id="_IDGenVBox34">								
+								<Input
+									id="OUTERFME"
+									maxLength="3"
+									value="{oDataTable>OUTERFME}"
+									showValueHelp="true"
+									valueHelpRequest="onValueHelpRequest"
+									liveChange="onAutoSelectCheckbox"
+									change="onChangeValidateCell" 
+									valueState="{oDataTable>valueStateOUTERFME}"
+									valueStateText="{oDataTable>valueStateTextOUTERFME}"
+									showSuggestion="true"
+									suggestionItems="{
+										path: 'UnitModel>/',
+										templateShareable: false
+									}"
+									maxSuggestionWidth="auto"
+									suggest="onSuggest($event, 'Code', 'Text')"
+									textAlign="Begin"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+								>
+									<suggestionItems>
+										<core:ListItem id="_IDGenListItem34" text="{UnitModel>Code}" additionalText="{UnitModel>Text}" />
+									</suggestionItems>
+								</Input>
+								<Text
+									id="OUTERFME_TEXT"
+									text="{oDataTable>OUTERFME}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTERFME}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 所要数量 -->
+					<table:Column
+						id="_IDGenColumn11"
+						hAlign="Center"
+						width="6rem"
+						name="{i18n>headerRequiredQuantity}"
+						sortProperty="OUTBDMNGSort"
+					>
+						<Label id="_IDGenLabel10" text="{i18n>headerRequiredQuantity}" />
+						<table:template>
+							<VBox id="_IDGenVBox11">
+								<Text
+									id="OUTBDMNG"
+									text="{
+										parts:['oDataTable>OUTBDMNG', { value: 'USD'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false},
+                                        formatter : '.currencyInputFormatter'
+									}"
+									tooltip="{
+										parts:['oDataTable>OUTBDMNG', { value: 'USD'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false},
+                                        formatter : '.currencyInputFormatter'
+									}"
+									maxLines="1"
+									width="100%"
+									textAlign="End"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 基本単位 -->
+					<table:Column id="_IDGenColumn12" width="6rem" name="{i18n>headerBaseUnit}" sortProperty="OUTMEINS" hAlign="Center">
+						<Label id="_IDGenLabel11" text="{i18n>headerBaseUnit}" />
+						<table:template>
+							<VBox id="_IDGenVBox12">
+								<Text
+									id="OUTMEINS"
+									text="{oDataTable>OUTMEINS}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTMEINS}"
+									width="100%"
+									textAlign="Begin"
+								/>						
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 引当数量 -->
+					<table:Column
+						id="_IDGenColumn36"
+						width="6rem"
+						name="{i18n>headerAllocatedQuantity}"
+						sortProperty="OUTHIKIATESUYOSort"
+						hAlign="Center"
+					>
+						<Label id="_IDGenLabel36" text="{i18n>headerAllocatedQuantity}" />
+						<table:template>
+							<VBox id="_IDGenVBox36">
+								<Text
+									id="OUTHIKIATESUYO"
+									text="{
+										parts:['oDataTable>OUTHIKIATESUYO', { value: 'USD'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false},
+										formatter : '.currencyInputFormatter'
+									}"
+									tooltip="{
+										parts:['oDataTable>OUTHIKIATESUYO', { value: 'USD'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false},
+										formatter : '.currencyInputFormatter'
+									}"
+									maxLines="1"
+									width="100%"
+									textAlign="End"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+					<table:Column
+						id="_IDGenColumn13"
+						width="6rem"
+						name="{i18n>headerQuantity}"
+						sortProperty="OUTENMNGSort"
+						hAlign="Center"
+					>
+						<Label id="_IDGenLabel12" text="{i18n>headerQuantity}" />
+						<table:template>
+							<VBox id="_IDGenVBox13">
+								<Text
+									id="OUTENMNG"
+									text="{
+										parts:['oDataTable>OUTENMNG', { value: 'USD'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false},
+                                        formatter : '.currencyInputFormatter'
+									}"
+									tooltip="{
+										parts:['oDataTable>OUTENMNG', { value: 'USD'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false},
+                                        formatter : '.currencyInputFormatter'
+									}"
+									maxLines="1"
+									width="100%"
+									textAlign="End"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 所要日付 -->
+					<table:Column
+						id="_IDGenColumn15"
+						width="9rem"
+						name="{i18n>headerRequiredDate}"
+						sortProperty="OUTBDTER"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel14" text="{i18n>headerRequiredDate}" />
+						<table:template>
+							<VBox id="_IDGenVBox15">
+								<DatePicker
+									id="OUTBDTER"
+									value="{oDataTable>OUTBDTER}"
+									displayFormat="yyyy/MM/dd"
+									valueState="{oDataTable>valueStateOUTBDTER}"
+									valueStateText="{oDataTable>valueStateTextOUTBDTER}"
+									change="onChangeValidateCell"
+									textAlign="Begin"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+								/>
+								<Text
+									id="OUTBDTER_TEXT"
+									text="{oDataTable>OUTBDTER}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTBDTER}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+					<!-- M -->
+					<table:Column id="_IDGenColumn26" width="3rem" name="{i18n>headerM}" sortProperty="OUTKZMPF" hAlign="Center">
+						<Label id="_IDGenLabel25" text="{i18n>headerM}" />
+						<table:template>
+							<VBox id="_IDGenVBox26">
+								<Text id="OUTKZMPF" text="{oDataTable>OUTKZMPF}" tooltip="{oDataTable>OUTKZMPF}" maxLines="1" />
+							</VBox>
+						</table:template>
+					</table:Column>
+					<!-- 保管場所 -->
+					<table:Column
+						width="6rem"
+						id="_IDGenColumn24"
+						sortProperty="OUTLGORT"
+						name="{i18n>headerStorageLocation}"
+						hAlign="Center"
+					>
+						<Label id="_IDGenLabel23" text="{i18n>headerStorageLocation}" />
+						<table:template>
+							<VBox id="_IDGenVBox24">
+								<!-- Fix Fiori issue -->
+								<ComboBox
+									id="OUTLGORT"
+									showSecondaryValues="true"
+									items="{path: 'StorageLocationModel>/', templateShareable:false}"
+									selectedKey="{oDataTable>OUTLGORT}"
+									value="{oDataTable>OUTLGORT}"
+									valueState="{oDataTable>valueStateStorageLocation}"
+									valueStateText="{oDataTable>valueStateTextStorageLocation}"
+									change="onChangeValidateCell"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+								>
+									<core:ListItem
+										id="LGORT002ListItem"
+										key="{StorageLocationModel>Lgort}"
+										text="{StorageLocationModel>Lgort}"
+										additionalText="{StorageLocationModel>Name1}"
+									/>
+								</ComboBox>
+								<Text
+									id="OUTLGORT_TEXT"
+									text="{parts:['oDataTable>OUTLGORT', 'oDataTable>OUTWERKS'], formatter: '.onFormatTextStorageLocation'}"
+									maxLines="1"
+									tooltip="{parts:['oDataTable>OUTLGORT', 'oDataTable>OUTWERKS'], formatter: '.onFormatTextStorageLocation'}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+					<!-- BF -->
+					<table:Column width="3rem" id="_IDGenColumn" sortProperty="OUTRGEKZ" name="{i18n>headerBackflush}" hAlign="Center">
+						<Label id="_IDGenLabel" text="{i18n>headerBackflush}" />
+						<table:template>
+							<VBox id="_IDGenVBox">
+								<CheckBox
+									id="OUTRGEKZ"
+									select="onAutoSelectCheckbox"
+									selected="{oDataTable>OUTRGEKZ}"
+									enabled="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 出庫タスク -->
+					<table:Column
+						id="_IDGenColumn16"
+						width="9rem"
+						name="{i18n>headerGoodsIssueTask}"
+						sortProperty="OUTZ_TASK_CODE"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel15" text="{i18n>headerGoodsIssueTask}" />
+						<table:template>
+							<VBox id="_IDGenVBox16">
+								<Input
+									id="OUTZ_TASK_CODE"
+									maxLength="8"
+									showValueHelp="true"
+									valueHelpRequest="onValueHelpRequest"
+									value="{oDataTable>OUTZ_TASK_CODE}"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStateOutboundTask}"
+									valueStateText="{oDataTable>valueStateTextOutboundTask}"
+									showSuggestion="true"
+									suggestionItems="{
+										path: 'TaskCodeModel>/',
+										templateShareable: false
+									}"
+									maxSuggestionWidth="auto"
+									suggest="onSuggest($event, 'Ztaskcode')"
+									change="onChangeValidateCell"
+									textAlign="Begin"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+								>
+									<suggestionItems>
+										<core:ListItem id="_IDGenListItem6" text="{TaskCodeModel>Ztaskcode}" />
+									</suggestionItems>
+								</Input>
+								<Text
+									id="OutboundTaskText"
+									text="{oDataTable>OUTZ_TASK_CODE}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_TASK_CODE}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 出庫先 -->
+					<table:Column
+						id="_IDGenColumn17"
+						width="5rem"
+						sortProperty="OUTZ_SHUKKOSAKI"
+						name="{i18n>headerDeliveryDestination}"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel16" text="{i18n>headerDeliveryDestination}" labelFor="selectStatus" />
+						<table:template>
+							<VBox id="_IDGenVBox17">
+								<Input
+									id="OUTZ_SHUKKOSAKI"
+									maxLength="5"
+									value="{oDataTable>OUTZ_SHUKKOSAKI}"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStateDestination}"
+									valueStateText="{oDataTable>valueStateTextDestination}"
+									textAlign="Begin"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+									change="onChangeValidateCell"
+								/>
+								 <Text
+									id="DestinationText"
+									text="{oDataTable>OUTZ_SHUKKOSAKI}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_SHUKKOSAKI}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 図番 -->
+					<table:Column
+						width="8rem"
+						id="_IDGenColumn18"
+						sortProperty="OUTZ_ZUBAN"
+						name="{i18n>headerDrawingNumber}"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel17" text="{i18n>headerDrawingNumber}" />
+						<table:template>
+							<VBox id="_IDGenVBox18">
+								<Input
+									id="OUTZ_ZUBAN"
+									maxLength="11"
+									value="{oDataTable>OUTZ_ZUBAN}"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStateDrawingNo}"
+									valueStateText="{oDataTable>valueStateTextDrawingNo}"
+									textAlign="Begin"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onFormatEditable'}"
+									change="onChangeValidateCell"								
+								/>
+								 <Text
+									id="DrawingNoText"
+									text="{oDataTable>OUTZ_ZUBAN}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_ZUBAN}"
+									class="text-align-left"
+									visible="{parts: ['oDataTable>Outunchangeflg001', 'oDataTable>operation'], formatter: '.onShowText'}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 実出庫NO -->
+					<table:Column
+						id="_IDGenColumn25"
+						width="6rem"
+						sortProperty="OUTZ_JITSUSHUKKO_NO"
+						name="{i18n>headerActualDeliveryNO}"
+						hAlign="Center"
+					>
+						<Label text="{i18n>headerActualDeliveryNO}" id="_IDGenLabel24" />
+						<table:template>
+							<VBox id="_IDGenVBox25">
+								<Text
+									id="OUTZ_JITSUSHUKKO_NO"
+									text="{oDataTable>OUTZ_JITSUSHUKKO_NO}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_JITSUSHUKKO_NO}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>		
+                    <!-- 出庫指示状況 -->
+					<table:Column
+						id="_IDGenColumn3"
+						width="8rem"
+						name="{i18n>headerDeliveryInstructionStatus}"
+						sortProperty="OUTZ_SHUKKO_JOUKYOU"
+						hAlign="Center"
+					>
+						<Label id="_IDGenLabel2" text="{i18n>headerDeliveryInstructionStatus}" />
+						<table:template>
+							<VBox id="_IDGenVBox3">
+								<Text
+									id="OUTZ_SHUKKO_JOUKYOU"
+									text="{path: 'oDataTable>OUTZ_SHUKKO_JOUKYOU', formatter: '.onFormatTextDeliveryInstructionStatus'}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_SHUKKO_JOUKYOU}"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>					
+					<!-- 出庫完了フラグ -->
+					<table:Column
+						id="_IDGenColumn14"
+						width="8rem"
+						name="{i18n>headerGoodsIssueComplete}"
+						sortProperty="OUTKZEAR"
+						hAlign="Center"
+					>
+						<Label id="_IDGenLabel13" text="{i18n>headerGoodsIssueComplete}" />
+						<table:template>
+							<VBox id="_IDGenVBox14">
+								<Text id="OUTKZEAR" text="{oDataTable>OUTKZEAR}" tooltip="{oDataTable>OUTKZEAR}" maxLines="1" />
+							</VBox>
+						</table:template>
+					</table:Column>								
+                    <!-- ポジション -->
+					<table:Column
+						width="8rem"
+						id="_IDGenColumn19"
+						sortProperty="OUTZ_POSITION_NO"
+						name="{i18n>headerPosition}"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel18" text="{i18n>headerPosition}" />
+						<table:template>
+							<VBox id="_IDGenVBox19">
+								<Text
+									id="_IDGenText5"
+									text="{oDataTable>OUTZ_POSITION_NO}"
+									visible="{= ${oDataTable>operation} !== 'I' }"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_POSITION_NO}"
+									class="text-align-left"
+								/>
+								<Input
+									id="OUTZ_POSITION_NO"
+									maxLength="20"
+									value="{oDataTable>OUTZ_POSITION_NO}"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStatePosition}"
+									valueStateText="{oDataTable>valueStateTextPosition}"
+									visible="{= ${oDataTable>operation} === 'I' }"
+									textAlign="Begin"
+									change="onChangeValidateCell"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- PL -->
+					<table:Column width="8rem" id="_IDGenColumn20" sortProperty="OUTZ_PLNO" name="{i18n>headerPL}" hAlign="Center">
+						<Label required="true" id="_IDGenLabel19" text="{i18n>headerPL}" />
+						<table:template>
+							<VBox id="_IDGenVBox20">
+								<Text
+									id="_IDGenText6"
+									text="{oDataTable>OUTZ_PLNO}"
+									visible="{= ${oDataTable>operation} !== 'I' }"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_PLNO}"
+									class="text-align-left"
+								/>
+								<Input
+									id="OUTZ_PLNO"
+									maxLength="11"
+									value="{oDataTable>OUTZ_PLNO}"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStatePL}"
+									visible="{= ${oDataTable>operation} === 'I' }"
+									valueStateText="{oDataTable>valueStateTextPL}"
+									textAlign="Begin"
+									change="onChangeValidateCell"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 親品番 -->
+					<table:Column
+						width="8rem"
+						id="_IDGenColumn21"
+						sortProperty="OUTZ_OYA_HINBAN"
+						name="{i18n>headerParentPartNumber}"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel20" text="{i18n>headerParentPartNumber}" />
+						<table:template>
+							<VBox id="_IDGenVBox21">
+								<Text
+									id="_IDGenText7"
+									text="{oDataTable>OUTZ_OYA_HINBAN}"
+									visible="{= ${oDataTable>operation} !== 'I' }"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_OYA_HINBAN}"
+									class="text-align-left"
+								/>
+								<Input
+									id="OUTZ_OYA_HINBAN"
+									maxLength="11"
+									value="{oDataTable>OUTZ_OYA_HINBAN}"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStateParentPartNo}"
+									valueStateText="{oDataTable>valueStateTextParentPartNo}"
+									visible="{= ${oDataTable>operation} === 'I' }"
+									textAlign="Begin"
+									change="onChangeValidateCell"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 補助品番 -->
+					<table:Column
+						width="6rem"
+						id="_IDGenColumn22"
+						sortProperty="OUTZ_HOJO_HINBAN"
+						name="{i18n>headerAuxiliaryPartNumber}"
+						hAlign="Center"
+					>
+						<Label required="true" id="_IDGenLabel21" text="{i18n>headerAuxiliaryPartNumber}" />
+						<table:template>
+							<VBox id="_IDGenVBox22">
+								<Text
+									id="_IDGenText8"
+									text="{oDataTable>OUTZ_HOJO_HINBAN}"
+									visible="{= ${oDataTable>operation} !== 'I' }"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_HOJO_HINBAN}"
+									class="text-align-left"
+								/>
+								<Input
+									id="OUTZ_HOJO_HINBAN"
+									maxLength="3"
+									value="{oDataTable>OUTZ_HOJO_HINBAN}"
+									visible="{= ${oDataTable>operation} === 'I' }"
+									liveChange="onAutoSelectCheckbox"
+									valueState="{oDataTable>valueStateAuxiliaryPartNo}"
+									valueStateText="{oDataTable>valueStateTextAuxiliaryPartNo}"
+									change="onChangeValidateCell"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+                    <!-- 処理NO -->
+					<table:Column
+						width="5rem"
+						id="_IDGenColumn23"
+						sortProperty="OUTZ_SHORI_NO"
+						name="{i18n>headerProcessingNO}"
+						hAlign="Center"
+					>
+						<Label id="_IDGenLabel22" text="{i18n>headerProcessingNO}" />
+						<table:template>
+							<VBox id="_IDGenVBox23">
+								<Text
+									id="OUTZ_SHORI_NO"
+									text="{oDataTable>OUTZ_SHORI_NO}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTZ_SHORI_NO}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>                 
+					<!-- 入出庫予定番号 -->
+					<table:Column
+						id="_IDGenColumn27"
+						width="10rem"
+						sortProperty="OUTRSNUM"
+						name="{i18n>headerDeliveryScheduleNumber}"
+						hAlign="Center"
+						visible="false"
+					>
+						<Label text="{i18n>headerDeliveryScheduleNumber}" id="_IDGenLabel27" />
+						<table:template>
+							<VBox id="_IDGenVBox28">
+								<Text
+									id="OUTRSNUM"
+									text="{oDataTable>OUTRSNUM}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTRSNUM}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+					<!-- 入出庫予定明細番号 -->
+					<table:Column
+						id="_IDGenColumn28"
+						width="10rem"
+						sortProperty="OUTRSPOS"
+						name="{i18n>headerDeliveryScheduleItemNumber}"
+						hAlign="Center"
+						visible="false"
+					>
+						<Label text="{i18n>headerDeliveryScheduleItemNumber}" id="_IDGenLabel28" />
+						<table:template>
+							<VBox id="_IDGenVBox29">
+								<Text
+									id="OUTRSPOS"
+									text="{oDataTable>OUTRSPOS}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTRSPOS}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+					<!-- BOM明細番号 -->
+					<table:Column
+						id="_IDGenColumn29"
+						width="10rem"
+						sortProperty="OUTPOSNR"
+						name="{i18n>headerBOMItemNumber}"
+						hAlign="Center"
+						visible="false"
+					>
+						<Label text="{i18n>headerBOMItemNumber}" id="_IDGenLabel29" />
+						<table:template>
+							<VBox id="_IDGenVBox30">
+								<Text
+									id="OUTPOSNR"
+									text="{oDataTable>OUTPOSNR}"
+									maxLines="1"
+									tooltip="{oDataTable>OUTPOSNR}"
+									class="text-align-left"
+								/>
+							</VBox>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar id="_IDGenOverflowToolbar2">
+				<Button
+					id="messagePopoverBtn"
+					icon="{screen>/MessageButtonIcon}"
+					type="{screen>/MessageButtonType}"
+					text="{screen>/MessageCount}"
+					press="onPressMessageButton"
+					ariaHasPopup="Dialog"
+					visible="{screen>/HaveMessage}"
+				>
+					<dependents>
+						<MessagePopover id="messageArea" items="{screen>/Messages}">
+							<MessageItem
+								id="_IDGenMessageItem1"
+								type="{screen>type}"
+								title="{screen>title}"
+								description="{screen>description}"
+								subtitle="{screen>subtitle}"
+								counter="{screen>counter}"
+							/>
+						</MessagePopover>
+					</dependents>
+				</Button>
+				<ToolbarSpacer id="_IDGenToolbarSpacer2" />
+				<Button id="RegBtn001" text="{i18n>btnRegister}" type="Emphasized" press="onPressRegisterButton" />
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

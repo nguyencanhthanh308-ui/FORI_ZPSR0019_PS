@@ -1,0 +1,74 @@
+/*----------------------------------------
+  General Utilities
+----------------------------------------*/
+.unset-border {
+	border: unset;
+}
+
+.sapUiLocalBusyIndicatorSizeBig {
+	font-size: 1rem;
+	background-color: transparent;
+}
+
+/*----------------------------------------
+  Table Styling
+----------------------------------------*/
+/* Center-align table header labels */
+.sapFDynamicPageContent .sapUiTableHeaderDataCell .sapMLabel {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.sapFDynamicPageContent .sapUiTableHeaderDataCell .sapMLabelTextWrapper {
+	text-align: center;
+}
+
+.sapUiTableHeaderDataCell {
+	padding: 0px !important;
+}
+
+/* Radio button */
+.sapUiAFLayoutItem:has(.css-radio-btn) .sapUiCompFilterLabel {
+	padding-left: 0.5rem;
+	margin-bottom: -0.4rem;
+}
+
+.sapUiSizeCompact .sapMRbG .sapMRbBLabel {
+	padding-top: 0.3rem;
+}
+
+.sapMRbG .sapMRbHasLabel .sapMRbB {
+	padding-top: 0.3rem;
+}
+
+.sapMRb:focus:before {
+	border: none !important;
+}
+
+/* Display none */
+.d-none {
+	display: none;
+}
+
+.d-flex {
+	display: flex;
+}
+
+/* Checkbox */
+.selectRowCenter {
+	align-items: center;
+}
+
+/* Adjust padding for checkbox column (first column) */
+.sapUiTableCell > .sapUiTableCellInner.sapUiTableFirstColumnCell {
+	padding-left: 8px !important;
+	justify-self: center !important;
+}
+
+/* Highlight select rows */
+tr:has([data-style-class="selectRow"]) {
+	background-color: #e5f0fa !important;
+}
+tr:has([data-style-class="selectRow"]) > .sapUiTableCell {
+	border-bottom-color: #0854a0 !important;
+}

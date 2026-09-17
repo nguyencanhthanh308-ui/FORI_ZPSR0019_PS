@@ -1,0 +1,10 @@
+<core:FragmentDefinition id="_IDGenFragmentDefinition" xmlns="sap.m.p13n" xmlns:core="sap.ui.core">
+    <Popup id="_IDGenP13nDialog" title="ビュー設定">
+        <panels>
+            <!-- Column -->
+            <SelectionPanel id="_IDGenColumnsPanel" enableCount="true" showHeader="true" multiSelectMode="SelectAll" />
+            <!-- Sort -->
+            <SortPanel id="_IDGenSortPanel" />
+        </panels>
+    </Popup>
+</core:FragmentDefinition>

@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <SelectDialog
+		id="_IDGenSelectDialog1"
+		search="onSearchInValueHelp"
+		showClearButton="false"
+		busy="true"
+		busyIndicatorDelay="0"
+		noDataText=" "
+		contentHeight="70%"
+	>
+    </SelectDialog>
+</core:FragmentDefinition>

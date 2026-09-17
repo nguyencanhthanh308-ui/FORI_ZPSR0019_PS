@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+metadata:
+  name: zpsr0123
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: s4
+          url: http://s4prototype:443
+          client: '320'
+        app:
+          name: ZPSR0123
+          description: 出荷可能日登録
+          package: ZZZ01
+          transport: DS4K917242
+        exclude:
+          - /test/

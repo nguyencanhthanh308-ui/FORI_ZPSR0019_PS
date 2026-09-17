@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <SelectDialog
+		id="valueHelpPurchase"
+		title="{i18n>headerPurchaseRequisitionType}"
+		multiSelect="false"
+		contentHeight="70%"
+		items="{
+			path: 'searchHelpModel>/SearchHelpPurTypeSet',
+			templateShareable: false
+		}"
+	>
+		<StandardListItem id="_IDGenStandardListItem1" title="{searchHelpModel>Code}" description="{searchHelpModel>Text}" />
+	</SelectDialog>
+</core:FragmentDefinition>

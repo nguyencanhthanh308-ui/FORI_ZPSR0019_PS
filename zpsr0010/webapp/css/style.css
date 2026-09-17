@@ -1,0 +1,64 @@
+/* Enter your custom styles here */ /* Enter your custom styles here */
+.border-unset {
+	border: unset !important;
+}
+
+.sapUiAFLayoutItem {
+	max-width: 15rem !important;
+}
+
+.sapUiLocalBusyIndicatorSizeBig {
+	font-size: 1rem;
+	background-color: transparent;
+}
+
+div.sapUiTableCellInner:has(.FixColumn) {
+	padding: 0;
+}
+
+.sapUiTableCell.sapUiTableCellLastFixed {
+	border-right-color: #e5e5e5;
+}
+
+.sapUiAFLayoutItem {
+	.sapMLabelColonAndRequired:after {
+		color: blue !important;
+	}
+}
+
+tr:has([data-style-class="D"]) {
+	background-color: #e5e5e5 !important;
+}
+
+tr:has([data-style-class="D"]) > td div > span {
+	opacity: 0.25;
+}
+
+.text-align-left {
+	text-align: left;
+	width: 100% !important;
+}
+
+.ctm-lineH {
+	line-height: 1.2rem;
+}
+
+div.sapUiTableCellInner:has(.checkboxclass) {
+	padding: 0;
+}
+
+.sapUiTableCellFirst {
+	.sapUiTableCellInner {
+		padding: unset !important;
+	}
+}
+
+/* no1641 */
+.displayNone {
+	display: none !important;
+}
+
+/* no1641 */
+.sapUiFormCLContainer {
+	padding: 1rem 0.25rem;
+}

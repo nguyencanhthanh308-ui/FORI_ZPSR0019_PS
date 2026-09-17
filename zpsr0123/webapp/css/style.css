@@ -1,0 +1,66 @@
+/*----------------------------------------
+  General Utilities
+----------------------------------------*/
+.unset-border {
+	border: unset;
+}
+
+.sapUiLocalBusyIndicatorSizeBig {
+	font-size: 1rem;
+	background-color: transparent;
+}
+
+/*----------------------------------------
+  Table Styling
+----------------------------------------*/
+/* Center-align table header labels */
+.sapFDynamicPageContent .sapUiTableHeaderDataCell .sapMLabel {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.sapFDynamicPageContent .sapUiTableHeaderDataCell .sapMLabelTextWrapper {
+	text-align: center;
+}
+
+.sapFDynamicPageHeaderContent .sapUiAFLayoutItem {
+	flex-basis: unset;
+	flex: 0 0 18% !important;
+}
+
+/* Hide label */
+.sapUiAFLayoutItem:has(.css-hide-label) .sapMLabelTextWrapper::after {
+	content: "" !important;
+}
+
+.sapUiAFLayoutItem:has(.css-radio-btn) .sapUiCompFilterLabel {
+	padding-left: 0.5rem;
+}
+
+/* Display none */
+.d-none {
+	display: none;
+}
+
+.d-flex {
+	display: flex;
+}
+
+/* Custom Icon Input - Right Position  */
+/* Set padding at icon position */
+.inputIconRight .sapMInputBaseContentWrapper {
+	padding-right: 1.25rem;
+}
+
+/* icon position */
+.sapUiSizeCompact .inputIconRight .sapMInputBaseContentWrapper:after {
+	font-family: "SAP-icons";
+	margin-top: 0.25rem;
+	font-size: 1rem;
+	margin-right: -0.7rem;
+}
+
+/* sap-icon://search */
+.inputIconRight.search .sapMInputBaseContentWrapper:after {
+	content: "\e00d";
+}

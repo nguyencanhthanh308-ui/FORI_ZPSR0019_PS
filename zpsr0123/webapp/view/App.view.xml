@@ -1,0 +1,4 @@
+<mvc:View controllerName="zpsr0123.controller.App" displayBlock="true" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+    <App id="app">
+    </App>
+</mvc:View>

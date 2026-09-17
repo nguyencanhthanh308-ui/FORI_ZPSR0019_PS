@@ -1,0 +1,522 @@
+<mvc:View
+	controllerName="zpsr0108.controller.Main"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:table="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:variant="sap.ui.comp.variants"
+	xmlns:ft="sap.ushell.ui.footerbar"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:unified="sap.ui.unified"
+>
+    <f:DynamicPage id="_IDGenDynamicPage" headerExpanded="true" showFooter="true">
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader id="_MainDynamicPageHeader" pinnable="false">
+                <f:content>
+                    <fb:FilterBar
+						id="filterbar1"
+						showGoOnFB="false"
+						useToolbar="false"
+						showClearOnFB="false"
+						showFilterConfiguration="false"
+						filterContainerWidth="20rem"
+					>
+                        <fb:filterGroupItems>
+                            <!-- Assembly Month - 組立月 -->
+                            <fb:FilterGroupItem
+								id="_IDGenFilterGroupItem1"
+								name="AssemblyMonth"
+								groupName="g1"
+								label="{i18n>filterAssemblyMonth}"
+								visibleInFilterBar="true"
+							>
+                                <fb:control>
+                                    <DateRangeSelection
+										id="INNTANF"
+										displayFormat="yyyy/MM"
+										valueFormat="yyyy/MM"
+										value="{screen>/AssemblyMonth}"
+										change="onChangeAssemblyMonth"
+									>
+                                    </DateRangeSelection>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- WC - WC -->
+                            <fb:FilterGroupItem
+								id="_IDGenFilterGroupItem2"
+								name="WC"
+								groupName="g1"
+								label="{i18n>filterWC}"
+								visibleInFilterBar="true"
+							>
+                                <fb:control>
+                                    <MultiInput
+										id="INKTEXT"
+										name="WC"
+										tokens="{screen>/WC}"
+										showValueHelp="true"
+										valueHelpRequest="onMultipleConditionsVHRequested"
+										change="onTokenChange"
+										tokenUpdate="onTokenUpdate"
+										maxLength="40"
+										suggest="onSuggest"
+										suggestionItems="{path: 'WCModel>/', templateShareable: false}"
+									>	
+									
+										<tokens>
+                                            <Token id="_IDGenToken" key="{screen>key}" text="{screen>text}" />
+                                        </tokens>
+                                        <suggestionItems>
+                                            <core:ListItem
+												id="_IDGenListItem1"
+												key="{WCModel>arbpl}"
+												text="{WCModel>arbpl}"
+												additionalText="{WCModel>ktext}"
+											/>
+                                        </suggestionItems>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- Plant - プラント -->
+                            <fb:FilterGroupItem
+								id="_IDGenFilterGroupItem3"
+								name="Plant"
+								groupName="g1"
+								label="{i18n>filterPlant}"
+								visibleInFilterBar="true"
+								mandatory="true"
+							>
+                                <fb:control>
+									<MultiComboBox
+										id="INWERKS"
+										showSecondaryValues="true"
+										items="{
+                                            path: 'PlantModel>/',
+                                            templateShareable: false,
+											sorter: {
+												path: 'werks',
+												descending: false
+											}
+                                        }"
+										selectedKeys="{screen>/Plant}"
+									>
+										<core:ListItem id="_IDGenListItem" key="{PlantModel>werks}" text="{PlantModel>werks}:{PlantModel>name1}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- Incomplete - 未完 -->
+                            <fb:FilterGroupItem
+								id="_IDGenFilterGroupItem4"
+								name="Incomplete"
+								groupName="g1"
+								label="{i18n>filterIncomplete}"
+								visibleInFilterBar="true"
+							>
+                                <fb:control>
+									<RadioButtonGroup id="INUSER_STATUS" selectedIndex="{screen>/Incomplete}" columns="2" class="css-radio-btn">
+                                        <!-- 未完のみ -->
+                                        <RadioButton id="_IDGenRadioButton1" text="{i18n>radioIncompleteOnly}" />
+                                        <!-- 全て -->
+                                        <RadioButton id="_IDGenRadioButton2" text="{i18n>radioAll}" />
+                                    </RadioButtonGroup>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+
+                    <OverflowToolbar id="_IDGenOverflowToolbar3" class="unset-border ">
+                        <ToolbarSpacer id="_IDGenToolbarSpacer3" />
+                        <Button
+							id="SearchBtn001"
+							text="{i18n>btnSearch}"
+							press="onPressSearchButton"
+							type="Emphasized"
+							width="4rem"
+						/>
+                        <Button id="ClearBtn001" text="{i18n>btnClear}" press="onPressClearButton" width="4rem" />
+                    </OverflowToolbar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <!-- DynamicPage Content -->
+        <f:content>
+            <table:Table
+				id="tblMain"
+				selectionMode="None"
+				rows="{oDataTable>/}"
+				visibleRowCount="10"
+				showColumnVisibilityMenu="true"
+				sort="onDisplaySaveButton"
+				columnResize="onDisplaySaveButton"
+				columnVisibility="onDisplaySaveButton"
+				columnMove="onDisplaySaveButton"
+				class="sapUiContentPadding"
+			>
+                <table:extension>
+					<!-- Reflecting Component -->
+					<VBox id="_IDGenVBox21" width="100%" class="sapUiTinyMarginBegin">
+						<HBox id="_IDGenHBox1" justifyContent="End" class="sapUiSmallMarginEnd sapUiTinyMarginBottom">
+							<Button id="_IDGenButton2" text="{i18n>btnDisplayOfBatchInput}" width="10rem" press="onToggleReflectingButton" />
+						</HBox>
+						<HBox id="reflect_component" justifyContent="SpaceBetween" width="100%" class="d-none sapUiTinyMarginBottom">
+                            <!-- Completion Date - 完成日 -->
+							<HBox id="_IDGenHBox" alignItems="Center">
+								<Text id="_IDGenText" text="{i18n>refCompletionDate}" class="sapMTitleStyleH5 sapUiSmallMarginEnd" />
+								<DatePicker
+									id="OUTISDD_REF"
+									width="10rem"
+									displayFormat="yyyy/MM/dd"
+									valueFormat="yyyy/MM/dd"
+									value="{screen>/CompletionDate}"
+									change="onChangeCompletionDateReflection"
+								/>
+							</HBox>
+							<Button
+								id="_IDGenButton"
+								text="{i18n>btnReflection}"
+								press="onPressReflectionButton"
+								class="sapUiSmallMarginEnd"
+								type="Emphasized"
+								width="4rem"
+							/>
+						</HBox>
+					</VBox>
+
+					<!-- Table header component -->
+                    <OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear" class="sapUiSmallMarginBottom">
+                        <!-- Table Title -->
+                        <Text
+							id="RowCount"
+							text="{i18n>titleHeader}（{screen>/RowCount}）｜"
+							class="sapMTitleStyleH4"
+						/>
+                        <!-- Variant Management -->
+                        <variant:VariantManagement
+							class="ctm-lineH"
+							id="Variants"
+							variantItems="{VariantList>/}"
+							enabled="true"
+							showExecuteOnSelection="false"
+							showShare="false"
+						>
+                            <variant:variantItems>
+                                <variant:VariantItem
+									id="_IDGenVariantItem1"
+									text="{VariantList>Name}"
+									key="{VariantList>Key}"
+								/>
+                            </variant:variantItems>
+                        </variant:VariantManagement>
+                        <!-- Bookmark -->
+                        <ft:AddBookmarkButton id="addToHome" text="" tooltip="{i18n>btnBookmark}" />
+                        <!-- P13n Dialog -->
+                        <Button
+							id="idSetting"
+							icon="sap-icon://action-settings"
+							press="onP13nDialogPress"
+							tooltip="{i13n>btnViewSetting}"
+						/>
+                        <!-- Visible Row Count Slider -->
+                        <Slider
+							id="visibleSlider"
+							class="sapUiTinyMarginBottom"
+							value="{screen>/recordVisibleSelected}"
+							width="10%"
+							min="1"
+							max="50"
+							showAdvancedTooltip="true"
+							showHandleTooltip="false"
+							change="onSliderChange"
+						/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+						<!-- Button Import Excel - EXCEL取込 -->
+                        <unified:FileUploader
+							id="ExcelBtn"
+							buttonOnly="true"
+							fileType="xlsx"
+							multiple="false"
+							change="onPressImportExcelButton"
+							width="5.5rem"
+							buttonText="{i18n>btnImportExcel}"
+							sameFilenameAllowed="true"
+							typeMissmatch="onTypeMissMatch"
+						/>
+                        <!-- Button Export Format - 取込フォーマットダウンロード-->
+                        <Button
+							id="FormatBtn"
+							text="{i18n>btnExportFormat}"
+							press="onPressExportFormatButton"
+							enabled="true"
+							width="14rem"
+						/>
+                        <!-- Button Download - ダウンロード -->
+                        <Button
+							id="EXP0001"
+							press="onPressDownloadButton"
+							icon="sap-icon://excel-attachment"
+							tooltip="{i18n>btnDowloadExcel}"
+							enabled="true"
+						/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+				 	<!-- Checkbox -->
+                    <table:Column id="_IDGenColumnCheckBox" width="1.5rem">
+						<CheckBox id="IdCheckAll" selected="{screen>/bCheckAll}" select="onCheckAllToggle" class="selectRowCenter" />
+                        <table:template>
+                            <VBox id="_IDGenCheckBox1" class="selectRowCenter">
+                                <customData>
+                                    <core:CustomData
+										key="style-class"
+										value="selectRow"
+										writeToDom="{= ${oDataTable>bSelected}}"
+									/> 
+                                </customData>
+                                <CheckBox
+									id="_IDGenCheckBox2"
+									enabled="{oDataTable>bIsActiveCompletionDate}"
+									selected="{oDataTable>bSelected}"
+									select="onCheckBoxSelected"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+                    <!-- Column No - No -->
+                    <table:Column id="_IDGenColumn" name="{i18n>headerNo}" sortProperty="index" width="4rem">
+                        <Label id="_IDGenLabel" text="{i18n>headerNo}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox">
+                                <Text
+									id="OUTNO"
+									text="{oDataTable>index}"
+									maxLines="1"
+									width="100%"
+									textAlign="Center"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Completion Date - 完成日 -->
+                    <table:Column
+						id="_IDGenColumn1"
+						name="{i18n>headerCompletionDate}"
+						sortProperty="isdd"
+						width="10rem"
+					>
+                        <Label id="_IDGenLabel1" text="{i18n>headerCompletionDate}" required="true" />
+                        <table:template>
+                            <VBox id="_IDGenVBox1">
+								<DatePicker
+									id="OUTISDD"
+									value="{oDataTable>isdd}"
+									displayFormat="yyyy/MM/dd"
+									valueFormat="yyyy/MM/dd"
+									change="onChangeCompletionDate"
+									valueState="{oDataTable>isddState}"
+									valueStateText="{oDataTable>isddText}"
+									enabled="{oDataTable>bIsActiveCompletionDate}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Logic Model - ロジック機種 -->
+                    <table:Column
+						id="_IDGenColumn2"
+						name="{i18n>headerLogicModel}"
+						sortProperty="zlogickishu"
+						width="10rem"
+					>
+                        <Label id="_IDGenLabel2" text="{i18n>headerLogicModel}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox2">
+                                <Text
+									id="OUTZ_LOGIC_KISHU"
+									text="{oDataTable>zlogickishu}"
+									maxLines="1"
+									tooltip="{oDataTable>zlogickishu}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Line - ライン -->
+                    <table:Column id="_IDGenColumn3" name="{i18n>headerLine}" sortProperty="arbpl" width="8rem">
+                        <Label id="_IDGenLabel3" text="{i18n>headerLine}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox3">
+                                <Text
+									id="OUTARBPL"
+									text="{oDataTable>arbpl}"
+									maxLines="1"
+									tooltip="{oDataTable>arbpl}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Assembly Number - 組番 -->
+                    <table:Column
+						id="_IDGenColumn4"
+						name="{i18n>headerAssemblyNumber}"
+						sortProperty="usr00"
+						width="8rem"
+					>
+                        <Label id="_IDGenLabel4" text="{i18n>headerAssemblyNumber}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox4">
+                                <Text
+									id="OUTUSR00"
+									text="{oDataTable>usr00}"
+									maxLines="1"
+									tooltip="{oDataTable>usr00}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Priority No - 優先NO -->
+                    <table:Column
+						id="_IDGenColumn5"
+						name="{i18n>headerPriorityNo}"
+						sortProperty="usr01"
+						width="8rem"
+						visible="false"
+					>
+                        <Label id="_IDGenLabel5" text="{i18n>headerPriorityNo}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox5">
+                                <Text
+									id="OUTUSR01"
+									text="{oDataTable>usr01}"
+									maxLines="1"
+									tooltip="{oDataTable>usr01}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Machine No - 機台NO -->
+                    <table:Column
+						id="_IDGenColumn6"
+						name="{i18n>headerMachineNo}"
+						sortProperty="zwbselement"
+						width="10rem"
+					>
+                        <Label id="_IDGenLabel6" text="{i18n>headerMachineNo}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox6">
+                                <Text
+									id="OUTZWBSELEMENT"
+									text="{oDataTable>zwbselement}"
+									maxLines="1"
+									tooltip="{oDataTable>zwbselement}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Assembly Start Date - 組立開始日 -->
+                    <table:Column
+						id="_IDGenColumn9"
+						name="{i18n>headerAssemblyStartDate}"
+						sortProperty="ntanf"
+						width="8rem"
+					>
+                        <Label id="_IDGenLabel9" text="{i18n>headerAssemblyStartDate}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox9">
+                                <Text
+									id="OUTNTANF"
+									text="{oDataTable>ntanf}"
+									maxLines="1"
+									tooltip="{oDataTable>ntanf}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Assembly End Date - 組立終了日 -->
+                    <table:Column
+						id="_IDGenColumn10"
+						name="{i18n>headerAssemblyEndDate}"
+						sortProperty="ntend"
+						width="8rem"
+					>
+                        <Label id="_IDGenLabel10" text="{i18n>headerAssemblyEndDate}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox10">
+                                <Text
+									id="OUTNTEND"
+									text="{oDataTable>ntend}"
+									maxLines="1"
+									tooltip="{oDataTable>ntend}"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+
+					<!-- Column Error Message - エラーメッセージ -->
+                    <table:Column
+						id="_IDGenColumn11"
+						name="{i18n>headerErrorMessage}"
+						sortProperty="error_msg"
+						width="16rem"
+						autoResizable="true"
+					>
+                        <Label id="_IDGenLabel11" text="{i18n>headerErrorMessage}" />
+                        <table:template>
+                            <VBox id="_IDGenVBox11">
+                                <Text
+									id="OUTERROR_MESSAGE"
+									text="{oDataTable>error_msg}"
+									maxLines="1"
+									tooltip="{oDataTable>error_msg}"
+									width="100%"
+									wrapping="false"
+								/>
+                            </VBox>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar2">
+                <!-- Message Button -->
+                <Button
+					id="_IDGenButton1"
+					icon="{screen>/MessageButtonIcon}"
+					type="{screen>/MessageButtonType}"
+					text="{screen>/MessageCount}"
+					press="onPressMessageButton"
+					ariaHasPopup="Dialog"
+					visible="{screen>/HaveMessage}"
+				>
+                    <dependents>
+                        <MessagePopover id="messageArea" items="{screen>/Messages}">
+                            <MessageItem
+								id="_IDGenMessageItem1"
+								type="{screen>type}"
+								title="{screen>title}"
+								description="{screen>description}"
+								subtitle="{screen>subtitle}"
+								counter="{screen>counter}"
+							/>
+                        </MessagePopover>
+                    </dependents>
+                </Button>
+				<ToolbarSpacer id="_IDGenToolbarSpacer" />
+				<Button text="{i18n>btnRegister}" id="SaveButton" type="Emphasized" press="onPressSaveButton" />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
